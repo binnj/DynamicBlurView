@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class DynamicBlurView: UIView {
+@objc open class DynamicBlurView: UIView {
     open override class var layerClass: AnyClass {
         BlurLayer.self
     }
@@ -35,7 +35,7 @@ open class DynamicBlurView: UIView {
     }
 
     /// Radius of blur.
-    open var blurRadius: CGFloat {
+    @objc open var blurRadius: CGFloat {
         get { blurLayer.blurRadius }
         set { blurLayer.blurRadius = newValue }
     }
@@ -59,10 +59,10 @@ open class DynamicBlurView: UIView {
     open var iterations = 3
 
     /// If the view want to render beyond the layer, should be true.
-    open var isDeepRendering = false
+    @objc open var isDeepRendering = false
 
     /// When none of tracking mode, it can change the radius of blur with the ratio. Should set from 0 to 1.
-    open var blurRatio: CGFloat = 1 {
+    @objc open var blurRatio: CGFloat = 1 {
         didSet {
             if oldValue != blurRatio, let blurredImage = staticImage.flatMap(imageBlurred) {
                 blurLayer.draw(blurredImage)
@@ -147,7 +147,7 @@ extension DynamicBlurView {
 
 extension DynamicBlurView {
     /// Remove cache of blur image then get it again.
-    open func refresh() {
+    @objc open func refresh() {
         blurLayer.refresh()
         staticImage = nil
         blurRatio = 1
@@ -155,7 +155,7 @@ extension DynamicBlurView {
     }
 
     /// Remove cache of blur image.
-    open func remove() {
+    @objc open func remove() {
         blurLayer.refresh()
         staticImage = nil
         blurRatio = 1
